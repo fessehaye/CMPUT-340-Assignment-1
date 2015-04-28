@@ -1,0 +1,19 @@
+function [x,flag] = SolveUpperTri(U,y)
+    singul = det(U);
+    if(singul ~= 0)
+        flag = 0;  
+         n = length( y );
+         x = zeros( n, 1 );
+         u = diag(U);
+        for i=n:-1:1
+            x(i) = ( y(i) - U(i, :)* x )/u(i);
+        end
+    else
+            if(rank([U,y])==rank(U))
+                flag = 1;
+                x=zeros(1,1);
+            else
+                flag = -1;
+                x=zeros(1,1);
+            end
+    end
